@@ -78,7 +78,7 @@ El mejor modelo se obtuvo utilizando únicamente stopwords sin lematizar ni calc
 
 En el siguiente wordcloud se puede observar las palabras más recurrentes de cada tópico obtenido en el mejor modelo
 
-![Image](images/best_model.png "Word cloud de Tópicos")
+![Image](images/best_model2.png "Word cloud de Tópicos")
 
 
 ## Clasificación de Tópicos
