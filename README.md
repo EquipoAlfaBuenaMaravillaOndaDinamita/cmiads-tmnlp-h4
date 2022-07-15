@@ -87,12 +87,18 @@ Del wordcloud anterior clasificamos los tópicos de la siguiente forma:
 
 Tópico|Clasificación
 --|--
-0|Ciencia
-1|Deportes
-2|Historia y Cultura
-3|Filosofia
-4|Comida
-5|Arte y Musica
+0|Ingeniería
+1|Música
+2|Fórmula 1
+3|Deportes
+4|Comida y Salud
+5|Ciencia
+6|Historia y Cultura
+7|Lenguaje
+8|Planeta
+9|Servicios Básicos
+10|Minería
+11|Arte
 
 
 ## Sanity Check
@@ -101,14 +107,60 @@ Para cada categoría buscamos en la data de test artículos en los que fuera evi
 
 Artículo|Tópico Real|Distribución
 --|--|--
-Formula One Racing|Sports|0.9127 en Deportes
-Dynamics (music)|Music|0.8017 en Arte y Música
-Science (disambiguation)|Science|0.7542 en Ciencia
+Formula One Racing|Sports|0.8909 en Fórmula 1
+Ball game|Sports|0.8028 en Deporte
+Dynamics (music)|Music|0.7686 en Música
+Science (disambiguation)|Science|0.7557 en Ciencia
+Contemporary art|Art|0.7949 en Arte
+Artificial general intelligence|Technology|0.64357 en Ciencia
 
+## Análisis de Resultados
+
+### Resultados obtenidos modificando los hiperparámetros del modelo. Los resultados se encuentran ordenados de forma descendente por coherence_validation
+steps|ngrams|min_count|threshold|nlp_model|allowed_postags|topics|alpha|per_word_topics|passes|coherence_train|coherence_validation|train_min
+--|--|--|--|--|--|--|--|--|--|--|--|--
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_sm|[NOUN, VERB]|12|asymmetric|False|10|0.586725|0.546080|4.628365
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|8|auto|True|40|0.561070|0.524534|1.086980
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|8|auto|False|10|0.557511|0.520509|0.284341
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|8|auto|True|10|0.557511|0.520509|4.921063
+[lemmatization]|NaN|NaN|NaN|en_core_web_md|[NOUN, VERB]|8|auto|True|10|0.568655|0.519965|7.286702
+[remove_stopwords]|NaN|NaN|NaN|None|None|6|asymmetric|True|50|0.537478|0.508774|2.633175
+[remove_stopwords]|NaN|NaN|NaN|None|None|6|auto|True|30|0.530743|0.501648|2.059031
+[remove_stopwords]|NaN|NaN|NaN|None|None|6|auto|True|50|0.530743|0.501648|2.515073
+[remove_stopwords, lemmatization, ngram]|2.0|5.0|20.0|en_core_web_sm|[NOUN, VERB]|7|auto|True|20|0.499274|0.499662|4.921465
+[remove_stopwords]|NaN|NaN|NaN|None|None|8|auto|True|10|0.545303|0.491841|0.808153
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|6|auto|True|10|0.519166|0.487696|0.258804
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|6|asymmetric|True|10|0.519166|0.487696|0.287550
+[lemmatization]|NaN|NaN|NaN|en_core_web_sm|[NOUN, VERB]|8|auto|True|30|0.526597|0.482598|7.353234
+[lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|7|asymmetric|False|100|0.514929|0.480660|2.732714
+[lemmatization]|NaN|NaN|NaN|en_core_web_sm|[NOUN, VERB, ADJ, ADV, PART]|8|auto|True|40|0.474697|0.468948|8.022730
+[lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|8|auto|True|10|0.498721|0.465620|7.404282
+[lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|6|auto|True|20|0.492828|0.459613|0.523845
+[remove_stopwords, lemmatization, ngram]|2.0|5.0|20.0|en_core_web_lg|[NOUN, VERB]|6|auto|True|20|0.474395|0.448287|5.181289
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|5|asymmetric|True|10|0.451864|0.433712|0.253604
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|4|auto|True|10|0.446590|0.431690|0.270162
+[remove_stopwords, lemmatization, ngram]|3.0|5.0|20.0|en_core_web_lg|[NOUN, VERB]|5|asymmetric|True|20|0.452217|0.429713|5.277610
+[remove_stopwords, lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|5|asymmetric|False|20|0.438584|0.423401|0.462886
+[remove_stopwords]|NaN|NaN|NaN|None|None|4|asymmetric|False|20|0.412156|0.421416|0.940232
+[remove_stopwords]|NaN|NaN|NaN|None|None|4|auto|True|50|0.402703|0.410204|2.144185
+[lemmatization]|NaN|NaN|NaN|en_core_web_lg|[NOUN, VERB]|5|asymmetric|False|10|0.428078|0.408936|0.253451
+[ngram]|2.0|10.0|30.0|None|None|6|auto|True|20|0.425571|NaN|1.585524
+[ngram]|3.0|4.0|20.0|None|None|6|auto|True|20|0.368509|NaN|1.836605
+[ngram]|3.0|4.0|20.0|None|None|6|auto|False|30|0.368017|NaN|1.754770
+
+De la tabla de resumen de ejecución del modelo pudimos sacar las siguientes conclusiones:
+- Se puede observar que la métrica de coherencia para los datos de entrenamiento vs validación vs prueba son bastante similares, por lo que se puede concluir que el modelo está generalizando bastante bien
+- A diferencia de la tarea anterior de análisis de sentimiento, donde funcionaron mejor los modelos que únicamente lematizaban, para estos modelos se obtuvo mejor resultado al lematizar después de aplicar stopwords
+- Calcular NGrams disminuye el performance de los modelos. Al igual que calcular modelos que utilizan solo NGrams en el pipeline de preprocesamiento, ya que fueron los de menor performance por mucho. 
+- Scrapeamos información de 8 tópicos. Sin embargo, nos hizo sentido que el modelo que mejor coherencia nos entregó obtuviera 12 tópicos, ya que notamos que al extraer la información de wikipedia habían varios artículos que podían clasificarse en más de un tópico. Por ejemplo, notamos que separó todo lo relacionado a Fórmula 1 y el resto de deportes, lo cual hace bastante sentido.
+- Para la lematización consideramos que nos funcionó bien el incluir únicamente NOUN y VERB como `alloweb_postags` (quitando ADV, ADJ y PART que consideramos que no agregaban valor a los temas)
+- Se notó una relación de la coherencia con la cantidad de tópicos del modelo. A mayor cantidad de tópicos se obtuvo una mejor coherencia. Se puede observar que los modelos entrenados con 4, 5 y 6 tópicos por lo general tuvieron menor performance.
+- La cantidad de `passes` también se correlacionó positivamente con la coherencia del modelo
+- Nos vimos en la necesidad de extender las stopwords para limpiar algunos tokens que no quedaron del todo bien en el proceso de extracción de información de wikipedia. Ppalabras `isbn`, `pmid` o `retrieve` vimos que nos agregaban ruido en los wordclouds de los modelos, por lo que decidimos excluirlas en todos los entrenamientos
+- En el sanity check podemos observar que en todos los casos clasificó bastante satisfactorio el artículo, por lo que consideramos que el modelo funcionó bastante bien con datos con los que no fue entrenado.
 
 # Contribuciones
 Grupo 3 en canvas
 - Kevin García: repositorio, jupyter de data_split, instalación y configuración de ambiente, modelo base con método de fit y parametrización de hiperparámetros
 - Martín Guzmán: método predict, función para calcular métricas
 - Entre los 2: definición de pruebas a realizar, ejecución, clasificación de tópicos y sanity check
-
